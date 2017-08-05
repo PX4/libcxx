@@ -31,7 +31,7 @@
 #include "__sso_allocator"
 #if defined(_LIBCPP_MSVCRT) || defined(__MINGW32__)
 #include "support/win32/locale_win32.h"
-#elif !defined(__BIONIC__)
+#elif !defined(__BIONIC__) && !defined(__NuttX__)
 #include <langinfo.h>
 #endif
 #include <stdlib.h>
@@ -40,9 +40,13 @@
 #include "__undef_macros"
 
 // On Linux, wint_t and wchar_t have different signed-ness, and this causes
-// lots of noise in the build log, but no bugs that I know of. 
+// lots of noise in the build log, but no bugs that I know of.
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wsign-conversion"
+#endif
+
+#ifndef MB_LEN_MAX
+#  define MB_LEN_MAX 32
 #endif
 
 _LIBCPP_BEGIN_NAMESPACE_STD
@@ -781,7 +785,7 @@ const ctype_base::mask ctype_base::xdigit;
 const ctype_base::mask ctype_base::blank;
 const ctype_base::mask ctype_base::alnum;
 const ctype_base::mask ctype_base::graph;
-    
+
 locale::id ctype<wchar_t>::id;
 
 ctype<wchar_t>::~ctype()
@@ -1126,7 +1130,7 @@ ctype<char>::classic_table()  _NOEXCEPT
     return _C_ctype_tab_ + 1;
 #elif defined(__GLIBC__)
     return _LIBCPP_GET_C_LOCALE->__ctype_b;
-#elif __sun__
+#elif defined(__sun__)
     return __ctype_mask;
 #elif defined(_LIBCPP_MSVCRT) || defined(__MINGW32__)
     return __pctype_func();
@@ -1160,7 +1164,7 @@ ctype<char>::__classic_upper_table() _NOEXCEPT
 {
     return _LIBCPP_GET_C_LOCALE->__ctype_toupper;
 }
-#elif __NetBSD__
+#elif defined(__NetBSD__)
 const short*
 ctype<char>::__classic_lower_table() _NOEXCEPT
 {
