@@ -46,7 +46,7 @@ if [ ! -f "${nuttx_path}/Makefile" ]; then
   exit 1
 fi
 
-libxx_srcdir=${nuttx_path}/libxx
+libxx_srcdir=${nuttx_path}/libs/libxx
 
 if [ ! -d "${libxx_srcdir}" ]; then
   echo "ERROR: Directory ${libxx_srcdir} does not exist"
@@ -115,7 +115,7 @@ for file in $filelist; do
   else
     endfile=${file}
   fi
-  install -D ${file} ${nuttx_path}/libxx/libcxx/${endfile#src/}
+  install -D ${file} ${libxx_srcdir}/libcxx/${endfile#src/}
 done
 
 mkdir -p ${libcxx_incdir}
