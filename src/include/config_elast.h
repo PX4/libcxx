@@ -18,6 +18,8 @@
 
 #if defined(ELAST)
 #define _LIBCPP_ELAST ELAST
+#elif defined(__NuttX__)
+// No _LIBCPP_ELAST needed on NuttX
 #elif defined(_NEWLIB_VERSION)
 #define _LIBCPP_ELAST __ELASTERROR
 #elif defined(__Fuchsia__)

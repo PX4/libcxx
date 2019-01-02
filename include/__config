@@ -64,7 +64,7 @@
 #define _LIBCPP_CONCAT1(_LIBCPP_X,_LIBCPP_Y) _LIBCPP_X##_LIBCPP_Y
 #define _LIBCPP_CONCAT(_LIBCPP_X,_LIBCPP_Y) _LIBCPP_CONCAT1(_LIBCPP_X,_LIBCPP_Y)
 
-#define _LIBCPP_NAMESPACE _LIBCPP_CONCAT(__,_LIBCPP_ABI_VERSION)
+#define _LIBCPP_NAMESPACE
 
 #if __cplusplus < 201103L
 #define _LIBCPP_CXX03_LANG
@@ -145,6 +145,19 @@
 # endif  // _BYTE_ORDER == _LITTLE_ENDIAN
 # define _LIBCPP_HAS_QUICK_EXIT
 #endif  // __NetBSD__
+
+#ifdef __NuttX__
+# include <machine/endian.h>
+#  if _BYTE_ORDER == _LITTLE_ENDIAN
+#   define _LIBCPP_LITTLE_ENDIAN 1
+#   define _LIBCPP_BIG_ENDIAN    0
+# else  // _BYTE_ORDER == _LITTLE_ENDIAN
+#   define _LIBCPP_LITTLE_ENDIAN 0
+#   define _LIBCPP_BIG_ENDIAN    1
+# endif  // _BYTE_ORDER == _LITTLE_ENDIAN
+# define _LIBCPP_HAS_QUICK_EXIT
+typedef decltype(nullptr) nullptr_t;
+#endif  // __NuttX__
 
 #ifdef _WIN32
 #  define _LIBCPP_LITTLE_ENDIAN 1
@@ -323,6 +336,9 @@ typedef __char32_t char32_t;
 #if defined(__FreeBSD__)
 #define _LIBCPP_HAS_QUICK_EXIT
 #define _LIBCPP_HAS_C11_FEATURES
+#elif defined(__NuttX__)
+#define _LIBCPP_HAS_QUICK_EXIT
+#define _LIBCPP_HAS_C11_FEATURES
 #elif defined(__Fuchsia__)
 #define _LIBCPP_HAS_QUICK_EXIT
 #define _LIBCPP_HAS_C11_FEATURES
@@ -354,13 +370,12 @@ typedef __char32_t char32_t;
 #endif
 
 // Inline namespaces are available in Clang regardless of C++ dialect.
-#define _LIBCPP_BEGIN_NAMESPACE_STD namespace std {inline namespace _LIBCPP_NAMESPACE {
-#define _LIBCPP_END_NAMESPACE_STD  } }
-#define _VSTD std::_LIBCPP_NAMESPACE
+#define _LIBCPP_BEGIN_NAMESPACE_STD extern "C++" { namespace std {
+#define _LIBCPP_END_NAMESPACE_STD } } //extern C++
+#define _VSTD std
 
 namespace std {
-  inline namespace _LIBCPP_NAMESPACE {
-  }
+
 }
 
 #if !defined(_LIBCPP_HAS_NO_ASAN) && !__has_feature(address_sanitizer)
@@ -448,14 +463,12 @@ namespace std {
 
 #endif  // __GXX_EXPERIMENTAL_CXX0X__
 
-#define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { namespace _LIBCPP_NAMESPACE {
-#define _LIBCPP_END_NAMESPACE_STD  } }
-#define _VSTD std::_LIBCPP_NAMESPACE
+#define _LIBCPP_BEGIN_NAMESPACE_STD extern "C++" { namespace std {
+#define _LIBCPP_END_NAMESPACE_STD } } //extern C++
+#define _VSTD std
 
 namespace std {
-namespace _LIBCPP_NAMESPACE {
-}
-using namespace _LIBCPP_NAMESPACE __attribute__((__strong__));
+
 }
 
 #if !defined(_LIBCPP_HAS_NO_ASAN) && !defined(__SANITIZE_ADDRESS__)
@@ -476,8 +489,8 @@ using namespace _LIBCPP_NAMESPACE __attribute__((__strong__));
 #define _ALIGNAS(x) __declspec(align(x))
 #define _LIBCPP_HAS_NO_VARIADICS
 
-#define _LIBCPP_BEGIN_NAMESPACE_STD namespace std {
-#define _LIBCPP_END_NAMESPACE_STD  }
+#define _LIBCPP_BEGIN_NAMESPACE_STD extern "C++" { namespace std {
+#define _LIBCPP_END_NAMESPACE_STD } } //extern C++
 #define _VSTD std
 
 #  define _LIBCPP_WEAK
@@ -505,13 +518,12 @@ namespace std {
 #define __MULTILOCALE_API
 #endif
 
-#define _LIBCPP_BEGIN_NAMESPACE_STD namespace std {inline namespace _LIBCPP_NAMESPACE {
-#define _LIBCPP_END_NAMESPACE_STD  } }
-#define _VSTD std::_LIBCPP_NAMESPACE
+#define _LIBCPP_BEGIN_NAMESPACE_STD extern "C++" { namespace std {
+#define _LIBCPP_END_NAMESPACE_STD } } //extern C++
+#define _VSTD std
 
 namespace std {
-  inline namespace _LIBCPP_NAMESPACE {
-  }
+
 }
 
 #define _LIBCPP_HAS_NO_ASAN
@@ -823,6 +835,7 @@ extern "C" void __sanitizer_annotate_contiguous_container(
 # if defined(__FreeBSD__) || \
     defined(__Fuchsia__) || \
     defined(__NetBSD__) || \
+    defined(__NuttX__) || \
     defined(__linux__) || \
     defined(__APPLE__) || \
     defined(__CloudABI__) || \
@@ -864,7 +877,7 @@ extern "C" void __sanitizer_annotate_contiguous_container(
 #endif
 
 #if defined(__BIONIC__) || defined(__CloudABI__) ||                            \
-    defined(_LIBCPP_HAS_MUSL_LIBC)
+    defined(_LIBCPP_HAS_MUSL_LIBC) || defined(__NuttX__)
 #define _LIBCPP_PROVIDES_DEFAULT_RUNE_TABLE
 #endif
 
@@ -905,7 +918,7 @@ extern "C" void __sanitizer_annotate_contiguous_container(
 #endif
 
 #if !defined(_LIBCPP_HAS_NO_OFF_T_FUNCTIONS)
-#if defined(_WIN32) || defined(_NEWLIB_VERSION)
+#if defined(_WIN32) || defined(_NEWLIB_VERSION) || defined(__NuttX__)
 #define _LIBCPP_HAS_NO_OFF_T_FUNCTIONS
 #endif
 #endif
