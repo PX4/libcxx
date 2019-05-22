@@ -97,8 +97,8 @@ void *aligned_alloc(size_t alignment, size_t size);                       // C11
 
 extern "C++" {
 
-#undef abs
-#undef div
+//#undef abs
+//#undef div
 #undef labs
 #undef ldiv
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
@@ -107,19 +107,51 @@ extern "C++" {
 #endif
 
 // MSVCRT already has the correct prototype in <stdlib.h> if __cplusplus is defined
-#if !defined(_LIBCPP_MSVCRT) && !defined(__sun__) && !defined(_AIX)
-inline _LIBCPP_INLINE_VISIBILITY long      abs(     long __x) _NOEXCEPT {return  labs(__x);}
-#ifndef _LIBCPP_HAS_NO_LONG_LONG
-inline _LIBCPP_INLINE_VISIBILITY long long abs(long long __x) _NOEXCEPT {return llabs(__x);}
-#endif // _LIBCPP_HAS_NO_LONG_LONG
+//#if !defined(_LIBCPP_MSVCRT) && !defined(__sun__) && !defined(_AIX)
+//inline _LIBCPP_INLINE_VISIBILITY long      abs(     long __x) _NOEXCEPT {return  labs(__x);}
+//#ifndef _LIBCPP_HAS_NO_LONG_LONG
+//inline _LIBCPP_INLINE_VISIBILITY long long abs(long long __x) _NOEXCEPT {return llabs(__x);}
+//#endif // _LIBCPP_HAS_NO_LONG_LONG
 
-inline _LIBCPP_INLINE_VISIBILITY  ldiv_t div(     long __x,      long __y) _NOEXCEPT {return  ldiv(__x, __y);}
-#ifndef _LIBCPP_HAS_NO_LONG_LONG
-inline _LIBCPP_INLINE_VISIBILITY lldiv_t div(long long __x, long long __y) _NOEXCEPT {return lldiv(__x, __y);}
-#endif // _LIBCPP_HAS_NO_LONG_LONG
-#endif // _LIBCPP_MSVCRT / __sun__ / _AIX
+//inline _LIBCPP_INLINE_VISIBILITY  ldiv_t div(     long __x,      long __y) _NOEXCEPT {return  ldiv(__x, __y);}
+//#ifndef _LIBCPP_HAS_NO_LONG_LONG
+//inline _LIBCPP_INLINE_VISIBILITY lldiv_t div(long long __x, long long __y) _NOEXCEPT {return lldiv(__x, __y);}
+//#endif // _LIBCPP_HAS_NO_LONG_LONG
+//#endif // _LIBCPP_MSVCRT / __sun__ / _AIX
 
-}  // extern "C++"
+
+#undef atoi
+static inline int atoi(const char *nptr) {
+	return (int)strtol(nptr, NULL, 10);
+}
+
+#undef atol
+static inline double atol(const char *nptr) {
+	return strtol(nptr, NULL, 10);
+}
+
+#ifdef CONFIG_HAVE_LONG_LONG
+#undef atoll
+static inline long long int atoll(const char *nptr) {
+	return strtoll(nptr, NULL, 10);
+}
+#endif //CONFIG_HAVE_LONG_LONG
+
+#ifdef CONFIG_HAVE_DOUBLE
+#undef atof
+static inline double atof(const char *nptr) {
+	return strtod(nptr, NULL);
+}
+#endif //CONFIG_HAVE_DOUBLE
+
+#undef _Exit
+static inline void _Exit(int status) noexcept {
+       _exit(status);
+}
+
+
+
+} // extern "C++"
 
 #endif  // __cplusplus
 

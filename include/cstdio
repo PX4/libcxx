@@ -114,12 +114,12 @@ using ::fflush;
 using ::setbuf;
 using ::setvbuf;
 using ::fprintf;
-using ::fscanf;
+//using ::fscanf;
 using ::snprintf;
 using ::sprintf;
 using ::sscanf;
 using ::vfprintf;
-using ::vfscanf;
+//using ::vfscanf;
 using ::vsscanf;
 using ::vsnprintf;
 using ::vsprintf;
@@ -136,7 +136,7 @@ using ::fgetpos;
 using ::fseek;
 using ::fsetpos;
 using ::ftell;
-using ::rewind;
+//using ::rewind;
 using ::clearerr;
 using ::feof;
 using ::ferror;
@@ -147,22 +147,22 @@ using ::fopen;
 using ::freopen;
 using ::remove;
 using ::rename;
-using ::tmpfile;
+//using ::tmpfile;
 using ::tmpnam;
 #endif
 
 #ifndef _LIBCPP_HAS_NO_STDIN
-using ::getchar;
+//using ::getchar;
 #if _LIBCPP_STD_VER <= 11 && !defined(_LIBCPP_MSVCRT)
 using ::gets;
 #endif
-using ::scanf;
-using ::vscanf;
+//using ::scanf;
+//using ::vscanf;
 #endif
 
 #ifndef _LIBCPP_HAS_NO_STDOUT
 using ::printf;
-using ::putchar;
+//using ::putchar;
 using ::puts;
 using ::vprintf;
 #endif

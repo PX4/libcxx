@@ -110,7 +110,14 @@ void perror(const char* s);
 #ifdef __cplusplus
 
 #undef getc
+static inline int getc (FILE *s) {
+	fgetc(s);
+}
 #undef putc
+static inline int putc (int c, FILE *s) {
+	fputc(c, s);
+}
+
 #undef clearerr
 #undef feof
 #undef ferror

@@ -253,6 +253,19 @@
 #  define _LIBCPP_HAS_QUICK_EXIT
 #endif  // __NetBSD__
 
+#ifdef __NuttX__
+# include <machine/endian.h>
+#  if _BYTE_ORDER == _LITTLE_ENDIAN
+#   define _LIBCPP_LITTLE_ENDIAN 1
+#   define _LIBCPP_BIG_ENDIAN    0
+# else  // _BYTE_ORDER == _LITTLE_ENDIAN
+#   define _LIBCPP_LITTLE_ENDIAN 0
+#   define _LIBCPP_BIG_ENDIAN    1
+# endif  // _BYTE_ORDER == _LITTLE_ENDIAN
+# define _LIBCPP_HAS_QUICK_EXIT
+typedef decltype(nullptr) nullptr_t;
+#endif  // __NuttX__
+
 #if defined(_WIN32)
 #  define _LIBCPP_WIN32API
 #  define _LIBCPP_LITTLE_ENDIAN
@@ -335,6 +348,8 @@
 #  elif defined(__Fuchsia__)
 #    define _LIBCPP_HAS_QUICK_EXIT
 #    define _LIBCPP_HAS_TIMESPEC_GET
+#    define _LIBCPP_HAS_C11_FEATURES
+#  elif defined(__NuttX__)
 #    define _LIBCPP_HAS_C11_FEATURES
 #  elif defined(__linux__)
 #    if !defined(_LIBCPP_HAS_MUSL_LIBC)
@@ -811,9 +826,9 @@ typedef __char32_t char32_t;
 #define _LIBCPP_INLINE_VISIBILITY _LIBCPP_HIDE_FROM_ABI
 
 // Inline namespaces are available in Clang/GCC/MSVC regardless of C++ dialect.
-#define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
-#define _LIBCPP_END_NAMESPACE_STD  } }
-#define _VSTD std::_LIBCPP_ABI_NAMESPACE
+#define _LIBCPP_BEGIN_NAMESPACE_STD extern "C++" { namespace std {
+#define _LIBCPP_END_NAMESPACE_STD  } } // extern "C++"
+#define _VSTD std
 _LIBCPP_BEGIN_NAMESPACE_STD _LIBCPP_END_NAMESPACE_STD
 
 #if _LIBCPP_STD_VER >= 17
