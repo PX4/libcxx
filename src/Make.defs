@@ -46,6 +46,8 @@ CXXSRCS += locale.cxx
 
 ifeq ($(CONFIG_LIBCXX_EXCEPTION),y)
 CXXSRCS += exception.cxx stdexcept.cxx
+else
+CXXFLAGS += -D_LIBCPP_NO_EXCEPTIONS
 endif
 
 # libsupc++ replacement
@@ -58,3 +60,5 @@ endif
 
 DEPPATH += --dep-path libcxx
 VPATH += libcxx
+
+CXXFLAGS += -D_LIBCPP_BUILD_STATIC
