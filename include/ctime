@@ -65,7 +65,7 @@ using ::time;
 using ::asctime;
 using ::ctime;
 using ::gmtime;
-using ::localtime;
+//using ::localtime;
 #endif
 using ::strftime;
 

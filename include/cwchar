@@ -125,8 +125,8 @@ using ::vfwprintf;
 using ::vswprintf;
 #ifndef _LIBCPP_MSVCRT
 using ::swscanf;
-using ::vfwscanf;
-using ::vswscanf;
+//using ::vfwscanf;
+//using ::vswscanf;
 #endif // _LIBCPP_MSVCRT
 using ::fgetwc;
 using ::fgetws;
@@ -183,7 +183,7 @@ using ::wcsrtombs;
 #ifndef _LIBCPP_HAS_NO_STDIN
 using ::getwchar;
 #ifndef _LIBCPP_MSVCRT
-using ::vwscanf;
+//using ::vwscanf;
 #endif // _LIBCPP_MSVCRT
 using ::wscanf;
 #endif

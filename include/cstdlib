@@ -103,11 +103,15 @@ using ::ldiv_t;
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
 using ::lldiv_t;
 #endif // _LIBCPP_HAS_NO_LONG_LONG
+#ifdef CONFIG_HAVE_DOUBLE
 using ::atof;
 using ::atoi;
 using ::atol;
+#endif // CONFIG_HAVE_DOUBLE
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
+#ifdef CONFIG_HAVE_DOUBLE
 using ::atoll;
+#endif // CONFIG_HAVE_DOUBLE
 #endif // _LIBCPP_HAS_NO_LONG_LONG
 using ::strtod;
 using ::strtof;
@@ -127,10 +131,14 @@ using ::free;
 using ::malloc;
 using ::realloc;
 using ::abort;
+#ifdef CONFIG_SCHED_ATEXIT
 using ::atexit;
+#endif // CONFIG_SCHED_ATEXIT
 using ::exit;
 using ::_Exit;
+#ifndef CONFIG_DISABLE_ENVIRON
 using ::getenv;
+#endif //CONFIG_DISABLE_ENVIRON
 using ::system;
 using ::bsearch;
 using ::qsort;
@@ -145,15 +153,15 @@ using ::ldiv;
 using ::lldiv;
 #endif // _LIBCPP_HAS_NO_LONG_LONG
 #ifndef _LIBCPP_HAS_NO_THREAD_UNSAFE_C_FUNCTIONS
-using ::mblen;
-using ::mbtowc;
-using ::wctomb;
+//using ::mblen;
+//using ::mbtowc;
+//using ::wctomb;
 #endif
-using ::mbstowcs;
-using ::wcstombs;
+//using ::mbstowcs;
+//using ::wcstombs;
 #ifdef _LIBCPP_HAS_QUICK_EXIT
-using ::at_quick_exit;
-using ::quick_exit;
+//using ::at_quick_exit;
+//using ::quick_exit;
 #endif
 #ifdef _LIBCPP_HAS_C11_FEATURES
 using ::aligned_alloc;
