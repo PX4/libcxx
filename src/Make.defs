@@ -42,8 +42,11 @@ CXXSRCS += shared_mutex.cxx string.cxx strstream.cxx system_error.cxx
 CXXSRCS += thread.cxx typeinfo.cxx utility.cxx valarray.cxx vector.cxx
 CXXSRCS += locale.cxx
 
-# Exception handling logic
+# FIXME: It turns out exception.cxx is needed even without exceptions,
+# otherwise we get "undefined reference to uncaught_exception()".
+CXXSRCS += exception.cxx
 
+# Exception handling logic
 ifeq ($(CONFIG_LIBCXX_EXCEPTION),y)
 CXXSRCS += exception.cxx stdexcept.cxx
 else
