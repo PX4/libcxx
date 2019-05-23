@@ -178,7 +178,7 @@ using ::wcsrtombs;
 
 #ifndef _LIBCPP_HAS_NO_STDIN
 using ::getwchar;
-using ::vwscanf;
+//using ::vwscanf;
 using ::wscanf;
 #endif
 

@@ -1405,10 +1405,10 @@ nextafter(_A1 __lcpp_x, _A2 __lcpp_y) _NOEXCEPT
 //inline _LIBCPP_INLINE_VISIBILITY float       nexttoward(float __lcpp_x, long double __lcpp_y) _NOEXCEPT       {return ::nexttowardf(__lcpp_x, __lcpp_y);}
 //inline _LIBCPP_INLINE_VISIBILITY long double nexttoward(long double __lcpp_x, long double __lcpp_y) _NOEXCEPT {return ::nexttowardl(__lcpp_x, __lcpp_y);}
 
-template <class _A1>
-inline _LIBCPP_INLINE_VISIBILITY
-typename std::enable_if<std::is_integral<_A1>::value, double>::type
-nexttoward(_A1 __lcpp_x, long double __lcpp_y) _NOEXCEPT {return ::nexttoward((double)__lcpp_x, __lcpp_y);}
+//template <class _A1>
+//inline _LIBCPP_INLINE_VISIBILITY
+//typename std::enable_if<std::is_integral<_A1>::value, double>::type
+//nexttoward(_A1 __lcpp_x, long double __lcpp_y) _NOEXCEPT {return ::nexttoward((double)__lcpp_x, __lcpp_y);}
 
 // remainder
 

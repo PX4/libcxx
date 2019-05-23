@@ -511,7 +511,7 @@ typedef __char32_t char32_t;
 #define _LIBCPP_HAS_UNIQUE_OBJECT_REPRESENTATIONS
 #endif
 
-#define _LIBCPP_ALWAYS_INLINE __attribute__ ((__always_inline__))
+#define _LIBCPP_ALWAYS_INLINE __attribute__ ((__always_inline__)) inline
 
 // No apple compilers support ""d and ""y at this time.
 #if _LIBCPP_CLANG_VER < 800 || defined(__apple_build_version__)
@@ -600,7 +600,7 @@ typedef __char32_t char32_t;
 #define _LIBCPP_HAS_UNIQUE_OBJECT_REPRESENTATIONS
 #endif
 
-#define _LIBCPP_ALWAYS_INLINE __attribute__ ((__always_inline__))
+#define _LIBCPP_ALWAYS_INLINE __attribute__ ((__always_inline__)) inline
 
 #elif defined(_LIBCPP_COMPILER_MSVC)
 
@@ -652,7 +652,7 @@ typedef __char32_t char32_t;
 
 #define _LIBCPP_HAS_NO_ASAN
 
-#define _LIBCPP_ALWAYS_INLINE __attribute__ ((__always_inline__))
+#define _LIBCPP_ALWAYS_INLINE __attribute__ ((__always_inline__)) inline
 
 #define _LIBCPP_HAS_NO_VECTOR_EXTENSION
 

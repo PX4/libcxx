@@ -138,9 +138,8 @@ using ::exit;
 using ::_Exit;
 #ifndef _LIBCPP_WINDOWS_STORE_APP
 using ::getenv;
-#endif //CONFIG_DISABLE_ENVIRON
+#endif //_LIBCPP_WINDOWS_STORE_APP
 using ::system;
-#endif
 using ::bsearch;
 using ::qsort;
 using ::abs;
@@ -159,8 +158,8 @@ using ::lldiv;
 //using ::mbstowcs;
 //using ::wcstombs;
 #if !defined(_LIBCPP_CXX03_LANG) && defined(_LIBCPP_HAS_QUICK_EXIT)
-using ::at_quick_exit;
-using ::quick_exit;
+//using ::at_quick_exit;
+//using ::quick_exit;
 #endif
 #if _LIBCPP_STD_VER > 14 && defined(_LIBCPP_HAS_C11_FEATURES)
 using ::aligned_alloc;

@@ -261,9 +261,9 @@ floating_point nextafter (arithmetic x, arithmetic y);
 float          nextafterf(float x, float y);
 long double    nextafterl(long double x, long double y);
 
-floating_point nexttoward (arithmetic x, long double y);
-float          nexttowardf(float x, long double y);
-long double    nexttowardl(long double x, long double y);
+//floating_point nexttoward (arithmetic x, long double y);
+//float          nexttowardf(float x, long double y);
+//long double    nexttowardl(long double x, long double y);
 
 floating_point remainder (arithmetic x, arithmetic y);
 float          remainderf(float x, float y);

@@ -167,7 +167,7 @@ enum align_val_t { __zero = 0, __max = (size_t)-1 };
 #define _THROW_BAD_ALLOC
 #endif
 
-extern "C++"
+extern "C++" {
 
 #if !defined(_LIBCPP_DEFER_NEW_TO_VCRUNTIME)
 
@@ -177,15 +177,6 @@ _LIBCPP_OVERRIDABLE_FUNC_VIS void  operator delete(void* __p) _NOEXCEPT;
 _LIBCPP_OVERRIDABLE_FUNC_VIS void  operator delete(void* __p, const std::nothrow_t&) _NOEXCEPT;
 #ifndef _LIBCPP_HAS_NO_LIBRARY_SIZED_DEALLOCATION
 _LIBCPP_OVERRIDABLE_FUNC_VIS _LIBCPP_AVAILABILITY_SIZED_NEW_DELETE void  operator delete(void* __p, std::size_t __sz) _NOEXCEPT;
-||||||| parent of a3fb34540... Fix exception, new and initializer_list link error
-_LIBCPP_NEW_DELETE_VIS void* operator new(std::size_t __sz) _THROW_BAD_ALLOC;
-_LIBCPP_NEW_DELETE_VIS void* operator new(std::size_t __sz, const std::nothrow_t&) _NOEXCEPT _NOALIAS;
-_LIBCPP_NEW_DELETE_VIS void  operator delete(void* __p) _NOEXCEPT;
-_LIBCPP_NEW_DELETE_VIS void  operator delete(void* __p, const std::nothrow_t&) _NOEXCEPT;
-#ifndef _LIBCPP_HAS_NO_SIZED_DEALLOCATION
-_LIBCPP_NEW_DELETE_VIS void  operator delete(void* __p, std::size_t __sz) _NOEXCEPT;
-
-} // extern "C++"
 #endif
 
 _LIBCPP_NODISCARD_AFTER_CXX17 _LIBCPP_OVERRIDABLE_FUNC_VIS void* operator new[](std::size_t __sz) _THROW_BAD_ALLOC;
