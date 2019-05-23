@@ -324,7 +324,7 @@ using ::islessgreater;
 using ::isunordered;
 using ::isunordered;
 
-using ::float_t;
+//using ::float_t;
 using ::double_t;
 
 #ifndef _AIX
