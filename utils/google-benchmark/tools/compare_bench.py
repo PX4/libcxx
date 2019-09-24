@@ -3,6 +3,7 @@
 compare_bench.py - Compare two benchmarks or their results and report the
                    difference.
 """
+from __future__ import print_function
 import sys
 import gbench
 from gbench import util, report
@@ -21,7 +22,7 @@ def main():
     json1 = gbench.util.run_or_load_benchmark(tests[0], bench_opts)
     json2 = gbench.util.run_or_load_benchmark(tests[1], bench_opts)
     output_lines = gbench.report.generate_difference_report(json1, json2)
-    print 'Comparing %s to %s' % (tests[0], tests[1])
+    print('Comparing %s to %s' % (tests[0], tests[1]))
     for ln in output_lines:
         print(ln)
 

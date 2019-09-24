@@ -1,5 +1,6 @@
 """util.py - General utilities for running, loading, and processing benchmarks
 """
+from __future__ import print_function
 import json
 import os
 import tempfile
@@ -80,7 +81,7 @@ def check_input_file(filename):
     """
     ftype, msg = classify_input_file(filename)
     if ftype == IT_Invalid:
-        print "Invalid input file: %s" % msg
+        print("Invalid input file: %s" % msg)
         sys.exit(1)
     return ftype
 

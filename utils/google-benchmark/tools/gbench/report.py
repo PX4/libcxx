@@ -1,5 +1,6 @@
 """report.py - Utilities for reporting statistics about benchmark results
 """
+from __future__ import print_function
 import os
 
 class BenchmarkColor(object):
@@ -124,7 +125,7 @@ class TestReportDifference(unittest.TestCase):
         ]
         json1, json2 = self.load_results()
         output_lines = generate_difference_report(json1, json2, use_color=False)
-        print output_lines
+        print(output_lines)
         self.assertEqual(len(output_lines), len(expect_lines))
         for i in xrange(0, len(output_lines)):
             parts = [x for x in output_lines[i].split(' ') if x]
